@@ -11,8 +11,8 @@ const authMiddleware = async (req, res, next) => {
     const token = authHeader.split(' ')[1];
     const decoded = jwt.verify(token, process.env.JWT_SECRET);
     
-    // Add user ID to request headers
-    req.headers.userId = decoded.userId;
+    // Use id from NextAuth token instead of userId
+    req.headers.userId = decoded.id;
     
     next();
   } catch (error) {
